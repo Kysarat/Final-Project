@@ -1,8 +1,7 @@
-from typing import Callable
+from typing import Callable, Dict
 
 import click
 import random
-import emoji
 
 
 @click.group()
@@ -14,7 +13,7 @@ def cli():
 @click.option("--delivery", default=False, is_flag=True)
 @click.option("--pick", default=False, is_flag=True)
 @click.argument("pizza", nargs=1)
-def order(pizza: str, delivery: bool, pick: bool):
+def order(pizza: str, delivery: bool, pick: bool) -> None:
     """ Принимает заказ и выводит этапы жизни пиццы"""
     click.echo(bake(pizza))
     if delivery:
@@ -24,17 +23,17 @@ def order(pizza: str, delivery: bool, pick: bool):
 
 
 @cli.command()
-def menu():
+def menu() -> None:
     """ Выводит меню """
-    print(
-        f'- Margherita {emoji.emojize(":cheese_wedge:")} : ' f"{str(Margherita(True))}"
-    )
-    print(f'- Pepperoni {emoji.emojize(":pizza:")} : {str(Pepperoni(True))}')
-    print(f'- Hawaiian {emoji.emojize(":pineapple:")} : {str(Hawaiian(True))}')
+    print(f"- Margherita 🧀 : " f"{str(Margherita(True))}")
+    print(f"- Pepperoni 🍕 : {str(Pepperoni(True))}")
+    print(f"- Hawaiian 🍍 : {str(Hawaiian(True))}")
 
 
 def log(tag: str) -> Callable:
-    """ Параметрический генератор """
+    """Параметрический декоратор
+    Выводит имя функции и время выполнения
+    """
 
     def wrapper(func: Callable) -> Callable:
         def inner_wrapper(*args, **kwargs):
@@ -46,22 +45,22 @@ def log(tag: str) -> Callable:
     return wrapper
 
 
-@log("{} - приготовили за {} с")
-def bake(pizza):
+@log("👨‍🍳 {} - приготовили за {} с")
+def bake(pizza) -> int:
     """ Готовит пиццу """
     count = random.randint(1, 15)
     return count
 
 
-@log("{} - доставили за {} с")
-def deliver(pizza):
+@log("🚚 {} - доставили за {} с")
+def deliver(pizza) -> int:
     """ Доставка пиццы """
     count = random.randint(5, 30)
     return count
 
 
-@log("{} - забрали за {} с")
-def pickup(pizza):
+@log("🏠 {} - забрали за {} с")
+def pickup(pizza) -> int:
     """ Самовывоз пиццы """
     count = random.randint(8, 60)
     return count
@@ -74,7 +73,7 @@ class BasePizza:
         self.is_large = is_large
         self.dict_ingredients = {"tomato_sauce": 40, "mozzarella": 150}
 
-    def dicts(self):
+    def dicts(self) -> Dict:
         """ Выводит словарь пицц"""
         return self.dict_ingredients
 
@@ -83,7 +82,7 @@ class BasePizza:
 
         return (self.is_large == other.is_large) & (self.dicts() == other.dicts())
 
-    def __str__(self):
+    def __str__(self) -> str:
         output = ", ".join(
             [key + ": " + str(value) for key, value in self.dict_ingredients.items()]
         )

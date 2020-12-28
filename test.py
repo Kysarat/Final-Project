@@ -46,7 +46,7 @@ def test_bake():
     """ Проверяет функцию готовки с декоратором """
     count = random.randint(1, 15)
     with patch.object(random, "randint", return_value=count):
-        exp = f"bake - приготовили за {count} с"
+        exp = f"👨‍🍳 bake - приготовили за {count} с"
         assert bake("Margherita") == exp
 
 
@@ -54,7 +54,7 @@ def test_pickup():
     """ Проверяет функцию самовывоза с декоратором """
     count = random.randint(8, 60)
     with patch.object(random, "randint", return_value=count):
-        exp = f"pickup - забрали за {count} с"
+        exp = f"🏠 pickup - забрали за {count} с"
         assert pickup("Margherita") == exp
 
 
@@ -62,5 +62,5 @@ def test_deliver():
     """ Проверяет функцию доставки с декоратором """
     count = random.randint(8, 60)
     with patch.object(random, "randint", return_value=count):
-        exp = f"deliver - доставили за {count} с"
+        exp = f"🚚 deliver - доставили за {count} с"
         assert deliver("Margherita") == exp

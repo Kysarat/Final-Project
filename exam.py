@@ -26,7 +26,9 @@ def order(pizza: str, delivery: bool, pick: bool):
 @cli.command()
 def menu():
     """ Выводит меню """
-    print(f'- Margherita {emoji.emojize(":cheese_wedge:")} : {str(Margherita(True))}')
+    print(
+        f'- Margherita {emoji.emojize(":cheese_wedge:")} : ' f"{str(Margherita(True))}"
+    )
     print(f'- Pepperoni {emoji.emojize(":pizza:")} : {str(Pepperoni(True))}')
     print(f'- Hawaiian {emoji.emojize(":pineapple:")} : {str(Hawaiian(True))}')
 

@@ -16,6 +16,8 @@
  
  ## Menu 🥡
  
+ Название пиццы: ингредиенты: граммы
+ 
  - Margherita 🧀 : tomato_sauce: 60, mozzarella: 150, tomatoes: 50
  
 - Pepperoni 🍕 : tomato_sauce: 40, mozzarella: 150, pepperoni: 170
@@ -23,22 +25,23 @@
 - Hawaiian 🍍 : tomato_sauce: 40, mozzarella: 150, chicken: 100, pineapples: 90
 
  
+ ## Запуск программы
  
-### Вывести меню:
+#### Вывести меню:
  
  python exam.py menu
  
-### Сделать заказ:
+#### Сделать заказ:
  
  python exam.py order pepperoni
  
-### Слелать заказ и выбрать способ доставки:
+#### Слелать заказ и выбрать способ доставки:
  
  Самовывоз:  python exam.py order pepperoni --pick 
  
  Курьер: python exam.py order pepperoni --delivery
  
-### Запустить тесты:
+#### Запустить тесты:
  
  python -m pytest test.py
  
